@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Postulación - ProConnect</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: #f5f5f5;
+      color: #333;
+    }
+
+    /* Header */
+    .header {
+      background-color: #2F5D50;
+      padding: 12px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: white;
+    }
+
+    .logo {
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    .search-bar {
+      flex: 1;
+      max-width: 400px;
+      margin: 0 20px;
+    }
+
+    .search-bar input {
+      width: 100%;
+      padding: 8px 16px;
+      border-radius: 20px;
+      border: none;
+      outline: none;
+    }
+
+    .nav-icons {
+      display: flex;
+      gap: 16px;
+    }
+
+    .nav-icon {
+      color: white;
+      text-decoration: none;
+      font-size: 20px;
+    }
+
+    /* Postulación Formulario */
+    .container {
+      max-width: 700px;
+      margin: 40px auto;
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      color: #2F5D50;
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: 500;
+    }
+
+    input, textarea, select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 6px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .btn-submit {
+      margin-top: 25px;
+      background-color: #2F5D50;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .btn-submit:hover {
+      background-color: #274b41;
+    }
+
+    .success-message {
+      background-color: #d4edda;
+      color: #155724;
+      padding: 10px;
+      border-radius: 6px;
+      margin-top: 20px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Encabezado -->
+  <header class="header">
+    <div class="logo">ProConnect</div>
+    <div class="search-bar">
+      <input type="text" placeholder="Buscar...">
+    </div>
+    <nav class="nav-icons">
+      <a href="networking_feed.html" class="nav-icon" title="Inicio">🏠</a>
+      <a href="usuarios.html" class="nav-icon" title="Usuarios">👥</a>
+      <a href="proyectos.html" class="nav-icon" title="Proyectos">📁</a>
+      <a href="mensajes.html" class="nav-icon" title="Mensajes">💬</a>
+      <a href="perfil.html" class="nav-icon" title="Perfil">👤</a>
+      <a href="configuracion.html" class="nav-icon" title="Configuración">⚙️</a>
+    </nav>
+  </header>
+
+  <!-- Formulario de postulación -->
+  <div class="container">
+    <h2>Formulario de Postulación</h2>
+    <form id="postulacionForm">
+      <label for="nombre">Nombre completo</label>
+      <input type="text" id="nombre" required>
+
+      <label for="email">Correo electrónico</label>
+      <input type="email" id="email" required>
+
+      <label for="telefono">Número de contacto</label>
+      <input type="tel" id="telefono" required>
+
+      <label for="cv">Enlace a tu CV o portafolio (Drive, PDF, LinkedIn, etc.)</label>
+      <input type="url" id="cv" placeholder="https://..." required>
+
+      <label for="mensaje">Mensaje o presentación breve</label>
+      <textarea id="mensaje" placeholder="Cuéntanos por qué eres ideal para este puesto..." required></textarea>
+
+      <button type="submit" class="btn-submit">Enviar Postulación</button>
+    </form>
+
+    <div class="success-message" id="successMsg">
+      ✅ ¡Tu postulación fue enviada con éxito!
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById('postulacionForm');
+    const successMsg = document.getElementById('successMsg');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      successMsg.style.display = 'block';
+      form.reset();
+    });
+  </script>
+
+</body>
+</html>

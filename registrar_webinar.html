@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Registrar Webinar - ProConnect</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: #f5f5f5;
+      color: #333;
+    }
+
+    .header {
+      background-color: #2F5D50;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: white;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .nav-icons {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .nav-icon {
+      color: white;
+      text-decoration: none;
+      padding: 6px;
+      border-radius: 4px;
+    }
+
+    .nav-icon:hover {
+      background-color: #33635C;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: 40px auto;
+      padding: 20px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      color: #2F5D50;
+      text-align: center;
+    }
+
+    .btn-secondary {
+      display: block;
+      margin: 0 auto 20px auto;
+      background-color: #ffffff;
+      color: #2F5D50;
+      padding: 8px 20px;
+      border: 2px solid #2F5D50;
+      border-radius: 6px;
+      text-align: center;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    .btn-secondary:hover {
+      background-color: #2F5D50;
+      color: white;
+    }
+
+    form label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: bold;
+      margin-top: 15px;
+    }
+
+    form input, form textarea, form select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+
+    form textarea {
+      resize: vertical;
+    }
+
+    .btn-submit {
+      background-color: #2F5D50;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .btn-submit:hover {
+      background-color: #33635C;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-top: 20px;
+      text-decoration: none;
+      color: #2F5D50;
+      font-size: 14px;
+    }
+
+    .back-link:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <div class="logo">ProConnect</div>
+    <nav class="nav-icons">
+      <a href="networking_feed.html" class="nav-icon" title="Inicio">🏠</a>
+      <a href="usuarios.html" class="nav-icon" title="Usuarios">👥</a>
+      <a href="proyectos.html" class="nav-icon" title="Proyectos">📁</a>
+      <a href="mensajes.html" class="nav-icon" title="Mensajes">💬</a>
+      <a href="perfil.html" class="nav-icon" title="Perfil">👤</a>
+      <a href="configuracion.html" class="nav-icon" title="Configuración">⚙️</a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <h2>Registrar un Nuevo Webinar</h2>
+
+    <!-- Nuevo botón agregado -->
+    <a href="webinars.html" class="btn-secondary">📅 Ver todos los webinars</a>
+
+    <form onsubmit="registrarWebinar(event)">
+      <label for="titulo">Título del Webinar:</label>
+      <input type="text" id="titulo" required />
+
+      <label for="organizador">Organizado por:</label>
+      <input type="text" id="organizador" required />
+
+      <label for="fecha">Fecha:</label>
+      <input type="date" id="fecha" required />
+
+      <label for="hora">Hora:</label>
+      <input type="time" id="hora" required />
+
+      <label for="modalidad">Modalidad:</label>
+      <select id="modalidad" required>
+        <option value="Virtual">Virtual</option>
+        <option value="Presencial">Presencial</option>
+        <option value="Mixta">Mixta</option>
+      </select>
+
+      <label for="descripcion">Descripción:</label>
+      <textarea id="descripcion" rows="4" required></textarea>
+
+      <button type="submit" class="btn-submit">Registrar Webinar</button>
+    </form>
+
+    <a href="networking_feed.html" class="back-link">← Volver al feed</a>
+  </div>
+
+  <script>
+    function registrarWebinar(event) {
+      event.preventDefault();
+      alert("Webinar registrado con éxito.");
+      // Aquí podrías guardar datos en localStorage o enviarlos a un backend
+    }
+  </script>
+</body>
+</html>

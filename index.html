@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ProConnect - Red Profesional</title>
+  <style>
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      padding-top: 120px;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.4);
+    }
+
+    .modal-content {
+      background-color: white;
+      margin: auto;
+      padding: 30px;
+      border: 1px solid #888;
+      width: 80%;
+      max-width: 400px;
+      border-radius: 12px;
+      text-align: center;
+      position: relative;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+    }
+
+    .close {
+      position: absolute;
+      right: 20px;
+      top: 15px;
+      font-size: 28px;
+      font-weight: bold;
+      color: #aaa;
+      cursor: pointer;
+    }
+
+    .close:hover {
+      color: #000;
+    }
+
+    .loader {
+      margin: 20px auto 0;
+      border: 6px solid #f3f3f3;
+      border-top: 6px solid #2F5D50;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    .auth-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin: 10px 0;
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 1em;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+
+    .google-btn {
+      background-color: #ffffff;
+      color: #444;
+      border: 1px solid #ccc;
+    }
+
+    .microsoft-btn {
+      background-color: #f3f3f3;
+      color: #000;
+      border: 1px solid #d6d6d6;
+    }
+
+    .auth-btn img {
+      height: 24px;
+    }
+
+    .google-btn:hover {
+      background-color: #f5f5f5;
+    }
+
+    .microsoft-btn:hover {
+      background-color: #e0e0e0;
+    }
+
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f5f5f5;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+      background-color: white;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .logo {
+      font-size: 1.5em;
+      font-weight: bold;
+      color: #1e4d45;
+    }
+
+    .nav-buttons a {
+      margin-left: 10px;
+      padding: 8px 16px;
+      background-color: #1e4d45;
+      color: white;
+      text-decoration: none;
+      border-radius: 6px;
+      font-size: 0.9em;
+    }
+
+    .container {
+      display: flex;
+      height: 90vh;
+      align-items: center;
+      justify-content: space-around;
+      padding: 20px;
+    }
+
+    .left {
+      max-width: 400px;
+    }
+
+    .left h1 {
+      font-size: 2em;
+      color: #111;
+    }
+
+    .button {
+      display: block;
+      margin: 10px 0;
+      padding: 12px;
+      background-color: #1e4d45;
+      color: white;
+      text-align: center;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      text-decoration: none;
+      font-size: 1em;
+    }
+
+    .button:hover {
+      background-color: #163d36;
+    }
+
+    .right img {
+      max-width: 400px;
+    }
+
+    p a {
+      color: #1e4d45;
+      font-weight: bold;
+      text-decoration: none;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="header">
+    <div class="logo">ProConnect</div>
+    <div class="nav-buttons">
+      <a href="descargar.html">Descargar Aplicación</a>
+      <a href="registro.html">UNIRSE AHORA</a>
+      <a href="login.html">INICIAR SESIÓN</a>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="left">
+      <h1>¡Bienvenido a tu red de crecimiento profesional!</h1>
+      <a href="#" class="auth-btn google-btn" onclick="openModal('Google')">
+        <img src="https://img.icons8.com/color/24/000000/google-logo.png" alt="Google Icon" />
+        Continuar con Google
+      </a>
+      <a href="#" class="auth-btn microsoft-btn" onclick="openModal('Microsoft')">
+        <img src="https://img.icons8.com/color/24/000000/microsoft.png" alt="Microsoft Icon" />
+        Continuar con Microsoft
+      </a>
+      <a href="login.html" class="button">INICIAR SESIÓN CON EL MAIL</a>
+      <p>¿Estás empezando a usar ProConnect? <a href="registro.html">Únete ahora</a></p>
+    </div>
+    <div class="right">
+      <img src="istockphoto-1282385124-612x612.jpg" alt="social network" />
+    </div>
+  </div>
+  <div id="authModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <h2 id="authProviderTitle">Iniciando sesión...</h2>
+      <p>Estamos redirigiéndote a la plataforma de autenticación de <strong id="providerName">Google</strong>.</p>
+      <div class="loader"></div>
+    </div>
+  </div>
+  <script>
+    function openModal(provider) {
+      document.getElementById('authModal').style.display = 'block';
+      document.getElementById('providerName').innerText = provider;
+      document.getElementById('authProviderTitle').innerText = `Iniciando sesión con ${provider}...`;
+
+      // Simulación de redirección (opcional)
+      setTimeout(() => {
+        window.location.href = "dashboard.html";  // Redirige luego de 2 segundos
+      }, 2000);
+    }
+
+    function closeModal() {
+      document.getElementById('authModal').style.display = 'none';
+    }
+
+    // Cerrar el modal si el usuario hace clic fuera de él
+    window.onclick = function (event) {
+      const modal = document.getElementById('authModal');
+      if (event.target === modal) {
+        modal.style.display = "none";
+      }
+    };
+  </script>
+</body>
+
+</html>

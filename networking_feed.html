@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProConnect - Feed Principal</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        /* Header */
+        .header {
+            background-color: #2F5D50;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .logo {
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .search-bar {
+            flex: 1;
+            max-width: 400px;
+            margin: 0 20px;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 8px 15px;
+            border: none;
+            border-radius: 20px;
+            background-color: white;
+        }
+
+        .nav-icons {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .nav-icon {
+            color: white;
+            text-decoration: none;
+            padding: 8px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        .nav-icon:hover {
+            background-color: #33635C;
+        }
+
+        /* Main Container */
+        .main-container {
+            display: flex;
+            max-width: 1200px;
+            margin: 20px auto;
+            gap: 20px;
+            padding: 0 20px;
+        }
+
+        /* Left Sidebar */
+        .left-sidebar {
+            width: 250px;
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            height: fit-content;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .profile-section {
+            text-align: center;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #D9D9D9;
+        }
+
+        .profile-pic {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: #8D8D92;
+            margin: 0 auto 10px;
+        }
+
+        .profile-name {
+            font-weight: bold;
+            color: #2F5D50;
+            margin-bottom: 5px;
+        }
+
+        .profile-title {
+            font-size: 12px;
+            color: #8D8D92;
+        }
+
+        .contacts-section h3 {
+            color: #2F5D50;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            padding: 8px 0;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        .contact-item:hover {
+            background-color: #f0f0f0;
+        }
+
+        .contact-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background-color: #8D8D92;
+            margin-right: 10px;
+        }
+
+        .contact-name {
+            font-size: 14px;
+            color: #333;
+        }
+
+        .groups-section {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #D9D9D9;
+        }
+
+        .create-group {
+            background-color: #2F5D50;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            margin-top: 10px;
+        }
+
+        /* Center Feed */
+        .center-feed {
+            flex: 1;
+            max-width: 500px;
+        }
+
+        .post-composer {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .composer-input {
+            width: 100%;
+            border: 1px solid #D9D9D9;
+            border-radius: 25px;
+            padding: 12px 20px;
+            font-size: 14px;
+            resize: none;
+            outline: none;
+        }
+
+        .composer-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+        }
+
+        .composer-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .composer-btn {
+            background: none;
+            border: none;
+            padding: 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            color: #8D8D92;
+            transition: background-color 0.3s;
+        }
+
+        .composer-btn:hover {
+            background-color: #f0f0f0;
+        }
+
+        .post-btn {
+            background-color: #2F5D50;
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .post {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .post-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .post-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background-color: #8D8D92;
+            margin-right: 12px;
+        }
+
+        .post-user-info h4 {
+            color: #2F5D50;
+            margin-bottom: 2px;
+        }
+
+        .post-user-info p {
+            color: #8D8D92;
+            font-size: 12px;
+        }
+
+        .post-content {
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        .post-image {
+            width: 100%;
+            height: 200px;
+            background-color: #33635C;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 18px;
+        }
+
+        .post-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 15px;
+            border-top: 1px solid #D9D9D9;
+        }
+
+        .post-stats {
+            color: #8D8D92;
+            font-size: 12px;
+        }
+
+        .post-buttons {
+            display: flex;
+            gap: 20px;
+        }
+
+        .post-action-btn {
+            background: none;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            color: #8D8D92;
+            font-size: 14px;
+            transition: background-color 0.3s;
+        }
+
+        .post-action-btn:hover {
+            background-color: #f0f0f0;
+        }
+
+        .post-action-btn.liked {
+            color: #2F5D50;
+        }
+
+        /* Right Sidebar */
+        .right-sidebar {
+            width: 300px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .sidebar-widget {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .widget-title {
+            color: #2F5D50;
+            margin-bottom: 15px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .webinar-card {
+            background: linear-gradient(135deg, #2F5D50, #33635C);
+            color: white;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .webinar-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .webinar-btn {
+            background: white;
+            color: #2F5D50;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .job-item {
+            padding: 15px 0;
+            border-bottom: 1px solid #D9D9D9;
+        }
+
+        .job-item:last-child {
+            border-bottom: none;
+        }
+
+        .job-title {
+            font-weight: bold;
+            color: #2F5D50;
+            margin-bottom: 5px;
+        }
+
+        .job-company {
+            color: #8D8D92;
+            font-size: 12px;
+            margin-bottom: 5px;
+        }
+
+        .job-location {
+            color: #8D8D92;
+            font-size: 12px;
+        }
+
+        .apply-btn {
+            background-color: #2F5D50;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            margin-top: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .main-container {
+                flex-direction: column;
+            }
+            
+            .left-sidebar, .right-sidebar {
+                width: 100%;
+            }
+            
+            .center-feed {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+    <div class="logo">ProConnect</div>
+    <div class="search-bar">
+        <input type="text" placeholder="¿Qué te gustaría buscar?" id="searchInput">
+    </div>
+    <nav class="nav-icons">
+        <a href="networking_feed.html" class="nav-icon" title="Inicio">🏠</a>
+        <a href="usuarios.html" class="nav-icon" title="Usuarios">👥</a>
+        <a href="proyectos.html" class="nav-icon" title="Proyectos">📁</a>
+        <a href="mensajes.html" class="nav-icon" title="Mensajes">💬</a>
+        <a href="perfil.html" class="nav-icon" title="Perfil">👤</a>
+        <a href="configuracion.html" class="nav-icon" title="Configuración">⚙️</a>
+    </nav>
+</header>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Left Sidebar -->
+        <aside class="left-sidebar">
+            <div class="profile-section">
+                <div class="profile-pic"></div>
+                <div class="profile-name">Taller Alvarado Torres Castrejon</div>
+                <div class="profile-title">Ingeniero de Sistemas</div>
+            </div>
+
+            <div class="contacts-section">
+                <h3>Contactos Conectados</h3>
+                <div class="contact-item">
+                    <div class="contact-avatar"></div>
+                    <div class="contact-name">Ana Perez</div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-avatar"></div>
+                    <div class="contact-name">Paco Calderon</div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-avatar"></div>
+                    <div class="contact-name">Patricia Martinez</div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-avatar"></div>
+                    <div class="contact-name">Tomas Monte</div>
+                </div>
+            </div>
+
+            <div class="groups-section">
+                <h3>Grupos</h3>
+                <div class="contact-item">
+                    <div class="contact-avatar"></div>
+                    <div class="contact-name">Área IT</div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-avatar"></div>
+                    <div class="contact-name">Proyecto UX</div>
+                </div>
+                <button class="create-group">Crear Grupo</button>
+            </div>
+        </aside>
+
+        <!-- Center Feed -->
+        <main class="center-feed">
+            <!-- Post Composer -->
+            <div class="post-composer">
+                <textarea class="composer-input" rows="3" placeholder="¿Qué estás pensando?"></textarea>
+      <button class="post-btn" onclick="createPost()">Publicar</button>
+                <div class="composer-actions">
+                    <div class="composer-buttons">
+                        <button class="composer-btn" title="Multimedia">📷</button>
+                        <button class="composer-btn" title="Publicar un Evento">📅</button>
+                        <button class="composer-btn" title="Escribir un Artículo">📝</button>
+                    </div>
+                    <button class="post-btn" onclick="createPost()">Publicar</button>
+                </div>
+            </div>
+
+            <!-- Posts -->
+            <div class="post">
+                <div class="post-header">
+                    <div class="post-avatar"></div>
+                    <div class="post-user-info">
+                        <h4>Patricia Martinez</h4>
+                        <p>Reclutadora de RR.HH • hace 1min</p>
+                    </div>
+                </div>
+                <div class="post-content">
+                    Somos una de las principales cadenas de retail textil peruano, con presencia regional y con más de 60 tiendas a nivel nacional. Actualmente estamos en la búsqueda de ASISTENTE DE ALMACÉN para nuestra tienda ubicada en MEGA PLAZA
+                </div>
+                <div class="post-image">
+                    
+                </div>
+                <div class="post-actions">
+                    <div class="post-stats">Somos una de las principales cadenas de retail textil peruano, con presencia regional y con más de 60 tiendas a nivel nacional. Actualmente estamos en la búsqueda de ASISTENTE DE ALMACÉN para nuestra tienda ubicada en MEGA PLAZA 150 • 💬 23 comentarios</div>
+                    <div class="post-buttons">
+                        <button class="post-action-btn" onclick="toggleLike(this)">👍 Me gusta</button>
+                        <button class="post-action-btn">💬 Comentar</button>
+                        <button class="post-action-btn">📤 Compartir</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Right Sidebar -->
+        <aside class="right-sidebar">
+            <!-- Webinar Widget -->
+            <div class="sidebar-widget">
+                <div class="webinar-card">
+                    <div class="webinar-title">WEBINARS DE POSIBLE INTERÉS</div>
+                    <a href="registrar_webinar.html" class="webinar-btn">Registrarse</a>
+
+                </div>
+            </div>
+
+            <!-- Job Opportunities -->
+            <div class="sidebar-widget">
+                <h3 class="widget-title">Publicaciones de Puestos Laborales</h3>
+                <div class="job-item">
+                    <div class="job-title">Practicante de Mantenimiento</div>
+                    <div class="job-public">publicado hace 2 hrs</div>
+                </div>
+                <div class="job-item">
+                    <div class="job-title">Ingeniero de Calidad</div>
+                    <div class="job-public">publicado hace 1 sem</div>
+                </div>
+                <div class="job-item">
+                    <div class="job-title">Practicante de IT</div>
+                    <div class="job-company">publicado hace 2 mes</div>
+                <div class="job-item">
+                    <div class="job-title">Tecnico Informatico</div>
+                    <div class="job-public">publicado hace 3hrs</div>
+                <div class="job-item">
+                    <div class="job-title">Ingeniero en Ciberseguirdad</div>
+                    <div class="job-public">publicado hace 4 sem</div>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <script>
+        document.getElementById('searchInput').addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        const query = this.value.trim();
+        if (query) {
+          window.location.href = `resultados.html?q=${encodeURIComponent(query)}`;
+        }
+        }
+       });
+       function createPost() {
+      const input = document.querySelector('.composer-input');
+      const content = input.value.trim();
+      if (content === '') {
+        alert('Escribe algo para publicar');
+        return;
+      }
+
+      const newPost = document.createElement('div');
+      newPost.className = 'post';
+      newPost.innerHTML = `
+        <h4>Tú</h4>
+        <p>${content}</p>
+      `;
+      const container = document.querySelector('.main-container');
+      container.insertBefore(newPost, container.children[1]); // antes del primer post
+      input.value = '';
+    }
+        // Función para alternar "Me gusta"
+        function toggleLike(button) {
+            button.classList.toggle('liked');
+            if (button.classList.contains('liked')) {
+                button.textContent = '👍 Te gusta';
+                button.style.color = '#2F5D50';
+            } else {
+                button.textContent = '👍 Me gusta';
+                button.style.color = '#8D8D92';
+            }
+        }
+
+        // Función para crear una nueva publicación
+        function createPost() {
+            const input = document.querySelector('.composer-input');
+            const content = input.value.trim();
+            
+            if (content === '') {
+                alert('Por favor escribe algo para publicar');
+                return;
+            }
+
+            // Crear el elemento del post
+            const postHTML = `
+                <div class="post">
+                    <div class="post-header">
+                        <div class="post-avatar"></div>
+                        <div class="post-user-info">
+                            <h4>Taller Alvarado Torres Castrejon</h4>
+                            <p>Ingeniero de Sistemas • ahora</p>
+                        </div>
+                    </div>
+                    <div class="post-content">
+                        ${content}
+                    </div>
+                    <div class="post-actions">
+                        <div class="post-stats">👍 0 • 💬 0 comentarios</div>
+                        <div class="post-buttons">
+                            <button class="post-action-btn" onclick="toggleLike(this)">👍 Me gusta</button>
+                            <button class="post-action-btn">💬 Comentar</button>
+                            <button class="post-action-btn">📤 Compartir</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            // Insertar el nuevo post al inicio del feed
+            const centerFeed = document.querySelector('.center-feed');
+            const postComposer = document.querySelector('.post-composer');
+            postComposer.insertAdjacentHTML('afterend', postHTML);
+
+            // Limpiar el input
+            input.value = '';
+        }
+
+        // Función de búsqueda
+        document.getElementById('searchInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                const query = this.value.trim();
+                if (query) {
+                    alert(`Buscando: ${query}`);
+                    // Aquí iría la lógica de búsqueda real
+                }
+            }
+        });
+
+        // Hacer que el textarea se expanda automáticamente
+        document.querySelector('.composer-input').addEventListener('input', function() {
+            this.style.height = 'auto';
+            this.style.height = this.scrollHeight + 'px';
+        });
+    </script>
+</body>
+</html>

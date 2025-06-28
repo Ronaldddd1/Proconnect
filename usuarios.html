@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Red Profesional</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: #f8f9fa;
+      height: 100vh;
+    }
+
+    .header {
+      background-color: #2F5D50;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 50px;
+      z-index: 100;
+    }
+
+    .logo {
+      color: white;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .search-bar {
+      flex: 1;
+      max-width: 400px;
+      margin: 0 20px;
+    }
+
+    .search-bar input {
+      width: 100%;
+      padding: 6px 15px;
+      border: none;
+      border-radius: 20px;
+      background-color: white;
+      font-size: 14px;
+    }
+
+    .nav-icons {
+      display: flex;
+      gap: 15px;
+      align-items: center;
+    }
+
+    .nav-icon {
+      color: white;
+      text-decoration: none;
+      font-size: 18px;
+      padding: 6px;
+      border-radius: 4px;
+      transition: background-color 0.3s;
+    }
+
+    .nav-icon:hover {
+      background-color: #33635C;
+    }
+
+    .sidebar {
+      width: 200px;
+      background: white;
+      border-right: 1px solid #e0e0e0;
+      padding-top: 60px;
+      height: 100vh;
+      overflow-y: auto;
+      position: fixed;
+      top: 50px;
+      left: 0;
+    }
+
+    .sidebar-section {
+      padding: 20px;
+    }
+
+    .sidebar-title {
+      font-size: 12px;
+      font-weight: 600;
+      color: #666;
+      text-transform: uppercase;
+      margin-bottom: 15px;
+    }
+
+    .sidebar-item {
+      display: flex;
+      align-items: center;
+      padding: 10px 0;
+      cursor: pointer;
+      transition: background-color 0.2s;
+      font-size: 14px;
+      color: #333;
+      border-radius: 4px;
+      margin-bottom: 5px;
+    }
+
+    .sidebar-item:hover {
+      background-color: #f0f0f0;
+    }
+
+    .sidebar-icon {
+      width: 16px;
+      height: 16px;
+      margin-right: 12px;
+      background: currentColor;
+      border-radius: 2px;
+    }
+
+    .main-content {
+      margin-left: 200px;
+      padding: 80px 20px 20px;
+    }
+
+    .notification-card {
+      background: white;
+      border-radius: 8px;
+      padding: 15px;
+      margin-bottom: 20px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .notification-header {
+      font-size: 14px;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 5px;
+    }
+
+    .notification-content {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .notification-icon {
+      width: 30px;
+      height: 30px;
+      background: #4CAF50;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 12px;
+    }
+
+    .notification-text {
+      font-size: 13px;
+      color: #666;
+    }
+
+    .close-notification {
+      background: none;
+      border: none;
+      font-size: 16px;
+      cursor: pointer;
+      color: #999;
+    }
+
+    .suggestions-section {
+      background: white;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+
+    .suggestions-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .suggestions-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: #333;
+    }
+
+    .close-suggestions, .expand-btn {
+      background: none;
+      border: none;
+      font-size: 18px;
+      cursor: pointer;
+      color: #999;
+    }
+
+    .suggestions-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+    }
+
+    .suggestion-card {
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      padding: 15px;
+      text-align: center;
+      background: white;
+      position: relative;
+    }
+
+    .suggestion-avatar {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      margin: 0 auto 10px;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .suggestion-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 5px;
+    }
+
+    .suggestion-title {
+      font-size: 12px;
+      color: #666;
+      margin-bottom: 5px;
+    }
+
+    .suggestion-mutual {
+      font-size: 11px;
+      color: #999;
+      margin-bottom: 15px;
+    }
+
+    .suggestion-actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    .btn-connect {
+      flex: 1;
+      background: #4CAF50;
+      color: white;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 15px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+
+    .btn-ignore {
+      background: none;
+      border: 1px solid #e0e0e0;
+      color: #666;
+      padding: 6px 12px;
+      border-radius: 15px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+
+    .webinar-banner {
+      background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+      color: white;
+      border-radius: 8px;
+      padding: 20px;
+      margin: 20px 15px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .webinar-content {
+      flex: 1;
+    }
+
+    .webinar-btn {
+      background: white;
+      color: #4CAF50;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .webinar-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .webinar-action-btn {
+      background: rgba(255,255,255,0.2);
+      border: none;
+      color: white;
+      padding: 5px 10px;
+      border-radius: 15px;
+      font-size: 11px;
+      cursor: pointer;
+    }
+
+    .messages-widget {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #4CAF50;
+      color: white;
+      padding: 10px 15px;
+      border-radius: 20px;
+      font-size: 13px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="logo">ProConnect</div>
+    <div class="search-bar">
+      <input type="text" placeholder="¿Qué te gustaría buscar?">
+    </div>
+    <nav class="nav-icons">
+      <a href="networking_feed.html" class="nav-icon" title="Inicio">🏠</a>
+<a href="usuarios.html" class="nav-icon" title="Usuarios">👥</a>
+<a href="proyectos.html" class="nav-icon" title="Proyectos">📁</a>
+<a href="mensajes.html" class="nav-icon" title="Mensajes">💬</a>
+<a href="perfil.html" class="nav-icon" title="Perfil">👤</a>
+<a href="configuracion.html" class="nav-icon" title="Configuración">⚙️</a>
+
+    </nav>
+  </header>
+
+  <div class="sidebar">
+    <div class="sidebar-section">
+      <div class="sidebar-title">Administrar mi red</div>
+      <div class="sidebar-item"><div class="sidebar-icon"></div>Conexiones</div>
+      <div class="sidebar-item"><div class="sidebar-icon"></div>Contactos</div>
+      <div class="sidebar-item"><div class="sidebar-icon"></div>Seguidores</div>
+      <div class="sidebar-item"><div class="sidebar-icon"></div>Grupos</div>
+      <div class="sidebar-item"><div class="sidebar-icon"></div>Eventos</div>
+      <div class="sidebar-item"><div class="sidebar-icon"></div>Hashtags</div>
+      <div class="sidebar-item"><div class="sidebar-icon"></div>Noticias</div>
+      <div class="sidebar-item" style="margin-top: 20px;"><div class="sidebar-icon"></div>Más</div>
+    </div>
+
+    <div class="webinar-banner">
+      <div class="webinar-content">
+        <div style="font-size: 10px; margin-bottom: 5px;">WEBINARS DE POSIBLE INTERÉS</div>
+        <div style="font-size: 12px; font-weight: 600; margin-bottom: 8px;">A New Plan for Webinar Success Starts Here!</div>
+        <button class="webinar-btn">Saber más</button>
+        <div class="webinar-actions">
+          <button class="webinar-action-btn">Inscribirme</button>
+          <button class="webinar-action-btn">❌</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="main-content">
+    <div class="notification-card">
+      <div>
+        <div class="notification-header">
+          Invitaciones Pendientes
+          <span style="background: #e0e0e0; padding: 2px 6px; border-radius: 10px; font-size: 11px;">3</span>
+        </div>
+        <div class="notification-content">
+          <div class="notification-icon">A</div>
+          <div class="notification-text">Andrea Calderón ha enviado una solicitud de amistad</div>
+        </div>
+      </div>
+      <button class="close-notification">×</button>
+    </div>
+
+    <div class="suggestions-section">
+      <div class="suggestions-header">
+        <h2 class="suggestions-title">Gente que quizás conozcas en Lima</h2>
+        <button class="close-suggestions">×</button>
+        <button class="expand-btn">⤢</button>
+      </div>
+
+      <div class="suggestions-grid">
+        <div class="suggestion-card">
+                    <button class="more-btn">⋯</button>
+                    <div class="suggestion-avatar" style="background-image: url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22%23ddd%22/><text x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dy=%22.3em%22 font-size=%2220%22 fill=%22%23999%22>RC</text></svg>');"></div>
+                    <div class="suggestion-name">Ricardo Chávez</div>
+                    <div class="suggestion-title">Gerente de Marketing</div>
+                    <div class="suggestion-mutual">2 amigos en común</div>
+                    <div class="suggestion-actions">
+                        <button class="btn-connect">🔗 Agregar</button>
+                    </div>
+                </div>
+
+                <div class="suggestion-card">
+                    <button class="more-btn">⋯</button>
+                    <div class="suggestion-avatar" style="background-image: url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22%23ddd%22/><text x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dy=%22.3em%22 font-size=%2220%22 fill=%22%23999%22>NR</text></svg>');"></div>
+                    <div class="suggestion-name">Natalia Ríos</div>
+                    <div class="suggestion-title">Diseñadora UI/UX</div>
+                    <div class="suggestion-mutual">5 amigos en común</div>
+                    <div class="suggestion-actions">
+                        <button class="btn-connect">🔗 Agregar</button>
+                    </div>
+                </div>
+
+                <div class="suggestion-card">
+                    <button class="more-btn">⋯</button>
+                    <div class="suggestion-avatar" style="background-image: url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22%23ddd%22/><text x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dy=%22.3em%22 font-size=%2220%22 fill=%22%23999%22>LR</text></svg>');"></div>
+                    <div class="suggestion-name">Luis Ramos</div>
+                    <div class="suggestion-title">Ingeniero de Datos</div>
+                    <div class="suggestion-mutual">3 amigos en común</div>
+                    <div class="suggestion-actions">
+                        <button class="btn-connect">🔗 Agregar</button>
+                    </div>
+                </div>
+
+                <div class="suggestion-card">
+                    <button class="more-btn">⋯</button>
+                    <div class="suggestion-avatar" style="background-image: url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22%23ddd%22/><text x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dy=%22.3em%22 font-size=%2220%22 fill=%22%23999%22>GC</text></svg>');"></div>
+                    <div class="suggestion-name">Gabriel Cruz</div>
+                    <div class="suggestion-title">Ingeniero de Datos</div>
+                    <div class="suggestion-mutual">12 amigos en común</div>
+                    <div class="suggestion-actions">
+                        <button class="btn-connect">🔗 Agregar</button>
+                    </div>
+                </div>
+
+                <div class="suggestion-card">
+                    <button class="more-btn">⋯</button>
+                    <div class="suggestion-avatar" style="background-image: url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22%23ddd%22/><text x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dy=%22.3em%22 font-size=%2220%22 fill=%22%23999%22>AC</text></svg>');"></div>
+                    <div class="suggestion-name">Andrea Calderón</div>
+                    <div class="suggestion-title">Abogada Senior</div>
+                    <div class="suggestion-mutual">7 amigos en común</div>
+                    <div class="suggestion-actions">
+                        <button class="btn-connect">🔗 Agregar</button>
+                    </div>
+                </div>
+
+                <div class="suggestion-card">
+                    <button class="more-btn">⋯</button>
+                    <div class="suggestion-avatar" style="background-image: url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22%23ddd%22/><text x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dy=%22.3em%22 font-size=%2220%22 fill=%22%23999%22>CM</text></svg>');"></div>
+                    <div class="suggestion-name">Carla Medina</div>
+                    <div class="suggestion-title">Psicóloga Educativa</div>
+                    <div class="suggestion-mutual">4 amigos en común</div>
+                    <div class="suggestion-actions">
+                        <button class="btn-connect">🔗 Agregar</button>
+                    </div>
+                </div>
+
+                <div class="suggestion-card">
+                    <button class="more-btn">⋯</button>
+                    <div class="suggestion-avatar" style="background-image: url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22%23ddd%22/><text x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dy=%22.3em%22 font-size=%2220%22 fill=%22%23999%22>BQ</text></svg>');"></div>
+                    <div class="suggestion-name">Bryan Quispe</div>
+                    <div class="suggestion-title">Consultor de Estrategia</div>
+                    <div class="suggestion-mutual">2 amigos en común</div>
+                    <div class="suggestion-actions">
+                        <button class="btn-connect">🔗 Agregar</button>
+                    </div>
+                </div>
+
+                <div class="suggestion-card">
+                    <button class="more-btn">⋯</button>
+                    <div class="suggestion-avatar" style="background-image: url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22%23ddd%22/><text x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dy=%22.3em%22 font-size=%2220%22 fill=%22%23999%22>FG</text></svg>');"></div>
+                    <div class="suggestion-name">Fabián Guzmán</div>
+                    <div class="suggestion-title">Lead Designer</div>
+                    <div class="suggestion-mutual">2 amigos en común</div>
+                    <div class="suggestion-actions">
+                        <button class="btn-connect">🔗 Agregar</button>
+                    </div>
+                </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="messages-widget">💬 Mensajes</div>
+</body>
+</html>

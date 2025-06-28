@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Resultados de Búsqueda - ProConnect</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+
+    .header {
+      background-color: #2F5D50;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .logo {
+      color: white;
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .search-bar {
+      flex: 1;
+      max-width: 400px;
+      margin: 0 20px;
+    }
+
+    .search-bar input {
+      width: 100%;
+      padding: 8px 15px;
+      border: none;
+      border-radius: 20px;
+      background-color: white;
+    }
+
+    .nav-icons {
+      display: flex;
+      gap: 20px;
+    }
+
+    .nav-icon {
+      color: white;
+      text-decoration: none;
+      font-size: 18px;
+      padding: 8px;
+      border-radius: 4px;
+    }
+
+    .nav-icon:hover {
+      background-color: #33635C;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 30px auto;
+      padding: 0 20px;
+    }
+
+    .results-title {
+      font-size: 22px;
+      color: #2F5D50;
+      margin-bottom: 20px;
+    }
+
+    .result-card {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .result-title {
+      font-size: 18px;
+      font-weight: bold;
+      color: #2F5D50;
+      margin-bottom: 5px;
+    }
+
+    .result-type {
+      font-size: 12px;
+      color: #8D8D92;
+      margin-bottom: 10px;
+    }
+
+    .result-desc {
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .apply-btn {
+      margin-top: 10px;
+      background-color: #2F5D50;
+      color: white;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .apply-btn:hover {
+      background-color: #33635C;
+    }
+
+    @media (max-width: 768px) {
+      .nav-icons {
+        gap: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="logo">ProConnect</div>
+    <div class="search-bar">
+      <input type="text" placeholder="¿Qué te gustaría buscar?" id="searchInput" />
+    </div>
+    <nav class="nav-icons">
+      <a href="networking_feed.html" class="nav-icon">🏠</a>
+      <a href="usuarios.html" class="nav-icon">👥</a>
+      <a href="proyectos.html" class="nav-icon">📁</a>
+      <a href="mensajes.html" class="nav-icon">💬</a>
+      <a href="perfil.html" class="nav-icon">👤</a>
+      <a href="configuracion.html" class="nav-icon">⚙️</a>
+    </nav>
+  </header>
+
+  <!-- Content -->
+  <div class="container">
+    <h2 class="results-title" id="resultsHeader">Resultados de búsqueda</h2>
+    <div id="resultsContainer"></div>
+  </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const query = params.get('q')?.toLowerCase();
+    const container = document.getElementById('resultsContainer');
+    const header = document.getElementById('resultsHeader');
+
+    const fakeResults = [
+      {
+        title: "Asistente de Almacén",
+        type: "Trabajo",
+        desc: "Buscamos un asistente con experiencia en logística y control de inventarios.",
+        keywords: ["almacén", "asistente", "logística"]
+      },
+      {
+        title: "Webinar sobre UX/UI",
+        type: "Webinar",
+        desc: "Únete al webinar gratuito sobre diseño centrado en el usuario.",
+        keywords: ["ux", "ui", "webinar", "diseño"]
+      },
+      {
+        title: "Ingeniero en Ciberseguridad",
+        type: "Trabajo",
+        desc: "Empresa líder en tecnología busca expertos en seguridad informática.",
+        keywords: ["ingeniero", "ciberseguridad", "seguridad"]
+      },
+      {
+        title: "Curso de Liderazgo Profesional",
+        type: "Webinar",
+        desc: "Aprende técnicas efectivas para liderar equipos de alto rendimiento.",
+        keywords: ["liderazgo", "curso", "webinar"]
+      },
+      {
+        title: "Desarrollador Full Stack",
+        type: "Trabajo",
+        desc: "Se necesita programador con experiencia en frontend y backend.",
+        keywords: ["desarrollador", "full stack", "programador"]
+      }
+    ];
+
+    function showResults() {
+      if (!query) {
+        header.textContent = "No ingresaste ningún término de búsqueda.";
+        return;
+      }
+
+      header.textContent = `Resultados para: "${query}"`;
+
+      const filtered = fakeResults.filter(r =>
+        r.keywords.some(k => k.includes(query))
+      );
+
+      if (filtered.length === 0) {
+        container.innerHTML = "<p>No se encontraron resultados.</p>";
+        return;
+      }
+
+      container.innerHTML = filtered.map(r => `
+        <div class="result-card">
+          <div class="result-title">${r.title}</div>
+          <div class="result-type">${r.type}</div>
+          <div class="result-desc">${r.desc}</div>
+          ${r.type === 'Trabajo' ? `<a href="postulacion.html"><button class="apply-btn">Postular</button></a>` : ''}
+        </div>
+      `).join('');
+    }
+
+    showResults();
+
+    // Habilitar búsqueda nueva desde el input
+    document.getElementById('searchInput').addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        const newQuery = this.value.trim();
+        if (newQuery) {
+          window.location.href = `resultados.html?q=${encodeURIComponent(newQuery)}`;
+        }
+      }
+    });
+  </script>
+</body>
+</html>
+

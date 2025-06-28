@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ProConnect - Oportunidades Laborales</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: #f5f5f5;
+      color: #333;
+    }
+
+    .header {
+      background-color: #2F5D50;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .logo {
+      color: white;
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .search-bar {
+      flex: 1;
+      max-width: 400px;
+      margin: 0 20px;
+    }
+
+    .search-bar input {
+      width: 100%;
+      padding: 8px 15px;
+      border: none;
+      border-radius: 20px;
+      background-color: white;
+    }
+
+    .nav-icons {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .nav-icon {
+      color: white;
+      text-decoration: none;
+      padding: 8px;
+      border-radius: 4px;
+      transition: background-color 0.3s;
+    }
+
+    .nav-icon:hover {
+      background-color: #33635C;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 20px auto;
+      padding: 0 20px;
+    }
+
+    .job-creator {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      margin-bottom: 20px;
+    }
+
+    .job-creator textarea {
+      width: 100%;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 10px;
+      resize: none;
+      height: 80px;
+      font-size: 14px;
+    }
+
+    .job-creator button {
+      margin-top: 10px;
+      background-color: #2F5D50;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 20px;
+      cursor: pointer;
+    }
+
+    .filters {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+
+    .filters select {
+      padding: 8px 12px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    .job-card {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      margin-bottom: 15px;
+      transition: transform 0.2s;
+    }
+
+    .job-card:hover {
+      transform: translateY(-2px);
+    }
+
+    .job-title {
+      font-size: 18px;
+      font-weight: bold;
+      color: #2F5D50;
+    }
+
+    .job-details {
+      font-size: 14px;
+      color: #666;
+      margin: 5px 0 10px;
+    }
+
+    .job-card button {
+      background-color: #2F5D50;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: background-color 0.3s;
+    }
+
+    .job-card button:hover {
+      background-color: #33635C;
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="logo">ProConnect</div>
+    <div class="search-bar">
+      <input type="text" placeholder="Buscar oportunidades...">
+    </div>
+    <nav class="nav-icons">
+      <a href="networking_feed.html" class="nav-icon">🏠</a>
+      <a href="usuarios.html" class="nav-icon">👥</a>
+      <a href="proyectos.html" class="nav-icon">📁</a>
+      <a href="mensajes.html" class="nav-icon">💬</a>
+      <a href="perfil.html" class="nav-icon">👤</a>
+      <a href="configuracion.html" class="nav-icon">⚙️</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <div class="job-creator">
+      <textarea placeholder="¿Tienes una oportunidad laboral? Describe el puesto aquí..."></textarea>
+      <button>Publicar puesto</button>
+    </div>
+
+    <div class="filters">
+      <select>
+        <option>Área</option>
+        <option>Tecnología</option>
+        <option>Marketing</option>
+        <option>Administración</option>
+      </select>
+      <select>
+        <option>Modalidad</option>
+        <option>Remoto</option>
+        <option>Presencial</option>
+        <option>Híbrido</option>
+      </select>
+      <select>
+        <option>Ubicación</option>
+        <option>Lima</option>
+        <option>Arequipa</option>
+        <option>Trujillo</option>
+      </select>
+    </div>
+
+    <div class="job-card">
+      <div class="job-title">Desarrollador Front-End</div>
+      <div class="job-details">Empresa: TechNova • Modalidad: Remoto • Publicado: Hoy</div>
+      <button onclick="location.href='postulacion.html'">Postular</button>
+    </div>
+
+    <div class="job-card">
+      <div class="job-title">Analista de Marketing Digital</div>
+      <div class="job-details">Empresa: MarketWise • Modalidad: Híbrido • Publicado: Hace 2 días</div>
+      <button onclick="location.href='postulacion.html'">Postular</button>
+    </div>
+
+    <div class="job-card">
+      <div class="job-title">Diseñador UX/UI</div>
+      <div class="job-details">Empresa: CreativaLab • Modalidad: Presencial • Publicado: Hace 1 semana</div>
+      <button onclick="location.href='postulacion.html'">Postular</button>
+    </div>
+
+    <div class="job-card">
+      <div class="job-title">Especialista en Ciberseguridad</div>
+      <div class="job-details">Empresa: SafeNet • Modalidad: Remoto • Publicado: Hace 3 días</div>
+      <button onclick="location.href='postulacion.html'">Postular</button>
+    </div>
+  </main>
+</body>
+</html>

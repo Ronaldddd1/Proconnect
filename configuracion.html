@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ProConnect - Configuración</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: #f5f5f5;
+      display: flex;
+      height: 100vh;
+      transition: filter 0.3s, background-color 0.3s, color 0.3s;
+    }
+
+    body.zoomed {
+      font-size: 1.2em;
+    }
+
+    body.high-contrast {
+      background-color: #000;
+      color: #fff;
+    }
+
+    header {
+      background-color: #2F5D50;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+    }
+
+    .logo {
+      color: white;
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .search-bar {
+      flex: 1;
+      max-width: 400px;
+      margin: 0 20px;
+    }
+
+    .search-bar input {
+      width: 100%;
+      padding: 8px 15px;
+      border: none;
+      border-radius: 20px;
+      background: white;
+    }
+
+    .nav-icons {
+      display: flex;
+      gap: 20px;
+    }
+
+    .nav-icon {
+      color: white;
+      text-decoration: none;
+      padding: 8px;
+      border-radius: 4px;
+      transition: background-color 0.3s;
+    }
+
+    .nav-icon:hover {
+      background-color: #33635C;
+    }
+
+    .sidebar {
+      width: 200px;
+      background: white;
+      padding-top: 60px;
+      border-right: 1px solid #ddd;
+      height: 100vh;
+    }
+
+    .sidebar button {
+      width: 100%;
+      padding: 12px 20px;
+      background: none;
+      border: none;
+      text-align: left;
+      font-size: 14px;
+      color: #333;
+      cursor: pointer;
+    }
+
+    .sidebar button:hover {
+      background-color: #f0f0f0;
+    }
+
+    .sidebar button.active {
+      background-color: #e8f5e9;
+      color: #2F5D50;
+      border-left: 4px solid #2F5D50;
+    }
+
+    .main-content {
+      flex: 1;
+      margin-top: 60px;
+      padding: 20px 30px;
+      overflow-y: auto;
+    }
+
+    .section {
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px;
+      padding: 20px;
+    }
+
+    .section h2 {
+      margin-bottom: 15px;
+      color: #2F5D50;
+    }
+
+    .config-row {
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid #eee;
+      padding: 8px 0;
+    }
+
+    .config-row:last-child {
+      border-bottom: none;
+    }
+
+    .config-label {
+      width: 150px;
+      font-weight: 600;
+    }
+
+    .config-value {
+      flex: 1;
+      margin: 0 10px;
+    }
+
+    .edit-btn {
+      background: none;
+      border: none;
+      color: #2F5D50;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    .accessibility-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .accessibility-item label {
+      margin-left: 8px;
+    }
+
+    .download-link {
+      display: inline-block;
+      margin-top: 10px;
+      color: #2F5D50;
+      text-decoration: none;
+    }
+
+    .messages-widget {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #2F5D50;
+      color: white;
+      padding: 10px 15px;
+      border-radius: 20px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+      font-size: 14px;
+    }
+
+    .edit-input {
+      flex: 1;
+      margin: 0 10px;
+      padding: 4px 8px;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="logo">ProConnect</div>
+    <div class="search-bar">
+      <input type="text" id="searchInput" placeholder="¿Qué te gustaría buscar?" />
+    </div>
+    <nav class="nav-icons">
+      <a href="networking_feed.html" class="nav-icon">🏠</a>
+      <a href="usuarios.html" class="nav-icon">👥</a>
+      <a href="proyectos.html" class="nav-icon">📁</a>
+      <a href="mensajes.html" class="nav-icon">💬</a>
+      <a href="perfil.html" class="nav-icon">👤</a>
+      <a href="configuracion.html" class="nav-icon">⚙️</a>
+    </nav>
+  </header>
+
+  <div class="sidebar">
+    <button class="active">General</button>
+    <button>Seguridad</button>
+    <button>Accesibilidad</button>
+    <button>Privacidad</button>
+    <button>Bloqueos</button>
+    <button>Idioma</button>
+    <button>Notificaciones</button>
+    <button>Móvil</button>
+    <button>Anuncios</button>
+    <button>Pagos</button>
+    <button>Ayuda</button>
+    <button onclick="cerrarSesion()">Cerrar sesión</button>
+  </div>
+
+  <div class="main-content">
+    <div class="section">
+      <h2>Configuración de la cuenta</h2>
+      <div class="config-row">
+        <div class="config-label">Nombre</div>
+        <div class="config-value">Taller Alvarado Torres Castrejón</div>
+        <button class="edit-btn">editar</button>
+      </div>
+      <div class="config-row">
+        <div class="config-label">Correo</div>
+        <div class="config-value">alvaradotorres@gmail.com</div>
+        <button class="edit-btn">editar</button>
+      </div>
+      <div class="config-row">
+        <div class="config-label">Contraseña</div>
+        <div class="config-value">La contraseña nunca se ha cambiado</div>
+        <button class="edit-btn">editar</button>
+      </div>
+      <div class="config-row">
+        <div class="config-label">Teléfono</div>
+        <div class="config-value">926487712</div>
+        <button class="edit-btn">editar</button>
+      </div>
+      <div class="config-row">
+        <div class="config-label">Currículum</div>
+        <div class="config-value">TorresAlvarado.pdf</div>
+        <button class="edit-btn">editar</button>
+      </div>
+      <a href="#" class="download-link">Descargar copia de tu información</a>
+    </div>
+
+    <div class="section">
+      <h2>Accesibilidad</h2>
+      <div class="accessibility-item">
+        <input type="checkbox" id="zoomToggle" />
+        <label for="zoomToggle">Zoom</label>
+      </div>
+      <div class="accessibility-item">
+        <input type="checkbox" id="contrastToggle" />
+        <label for="contrastToggle">Contraste alto</label>
+      </div>
+    </div>
+  </div>
+
+  <div class="messages-widget">💬 Mensajes</div>
+
+  <script>
+    // Editar campos
+    document.querySelectorAll('.edit-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const row = btn.closest('.config-row');
+        const valueEl = row.querySelector('.config-value');
+        if (btn.textContent === 'editar') {
+          const input = document.createElement('input');
+          input.className = 'edit-input';
+          input.value = valueEl.textContent;
+          row.replaceChild(input, valueEl);
+          btn.textContent = 'guardar';
+        } else {
+          const input = row.querySelector('.edit-input');
+          const div = document.createElement('div');
+          div.className = 'config-value';
+          div.textContent = input.value;
+          row.replaceChild(div, input);
+          btn.textContent = 'editar';
+        }
+      });
+    });
+
+    // Zoom funcional
+    document.getElementById('zoomToggle').addEventListener('change', (e) => {
+      document.body.classList.toggle('zoomed', e.target.checked);
+    });
+
+    // Contraste funcional
+    document.getElementById('contrastToggle').addEventListener('change', (e) => {
+      document.body.classList.toggle('high-contrast', e.target.checked);
+    });
+
+    // Búsqueda
+    document.getElementById('searchInput').addEventListener('keypress', function (e) {
+      if (e.key === 'Enter') {
+        const q = this.value.trim();
+        if (q) alert(`Buscando: ${q}`);
+      }
+    });
+    function cerrarSesion() {
+      // Aquí puedes agregar lógica para limpiar datos de sesión si usas almacenamiento local/cookies
+      alert("Has cerrado sesión correctamente.");
+      window.location.href = "index.html"; // Redirige a la página de login
+    }
+
+  </script>
+</body>
+
+</html>
